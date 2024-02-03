@@ -32,15 +32,14 @@ th total weight {self.total_weight} kg and total value ${self.total_value}"
     @classmethod
     def add_item(cls, item):
         """add_item"""
-        if isinstance(item, str) or isinstance(item, int):
+        if isinstance(item, (str,int)):
             return 'Item is not valid'
         if cls.total_weight + item.weight <= cls.__capacity:
             cls._items.append(item.name)
             cls.total_weight += item.weight
             cls.total_value += item.value
             return "Object added!"
-        else:
-            return f"Item '{item.name}' is too heavy for the backpack."
+        return f"Item '{item.name}' is too heavy for the backpack."
 
     @classmethod
     def set_capacity(cls, new_value_for_setting):
