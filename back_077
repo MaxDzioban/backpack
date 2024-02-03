@@ -6,6 +6,9 @@ class Item:
         self.name=name
         self.weight=weight
         self.value=value
+    def __repr__(self) -> str:
+        '''repr name, weight, value'''
+        return f"{self.name}"
     def __str__(self) -> str:
         '''str name, weight, value'''
         return f"{self.name} ({self.weight} kg, ${self.value})"
@@ -20,14 +23,16 @@ class Backpack:
         '''str about backpack'''
         if not self.items:
             return "Backpack contains 0 item with total weight 0 kg and total value $0"
-        else:
-            return f"Backpack contains {len(self._items)} items wi\
+        if len(self._items) == 1:
+            return f"Backpack contains {len(self._items)} item wi\
+th total weight {self.total_weight} kg and total value ${self.total_value}"
+        return f"Backpack contains {len(self._items)} items wi\
 th total weight {self.total_weight} kg and total value ${self.total_value}"
 
     @classmethod
     def add_item(cls, item):
         """add_item"""
-        if isinstance(item, str):
+        if isinstance(item, str) or isinstance(item, int):
             return 'Item is not valid'
         if cls.total_weight + item.weight <= cls.__capacity:
             cls._items.append(item.name)
